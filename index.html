@@ -1,412 +1,283 @@
 <!doctype html>
-<html lang="uk">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Davyd's Site 3102</title>
+  <title>Davyd's Site</title>
 
   <style>
     :root{
-      --bg1:#0f1220;
-      --bg2:#121b3a;
-      --card:#0f172a;
-      --text:#e5e7eb;
-      --muted:#a3a3a3;
-      --stroke:rgba(255,255,255,.12);
-      --shadow: 0 18px 50px rgba(0,0,0,.45);
-      --radius: 18px;
+      --yellow:#f3c400;
+      --bg:#d9d9d9;
+      --card:#f4f4f4;
+      --shadow: 0 2px 0 rgba(0,0,0,.25);
+      --blue:#1f2aa8;
+
+      --green:#2ea100;
+      --purple:#5a44ff;
+      --darkgray:#6f6f6f;
     }
 
     *{ box-sizing:border-box; }
-    html,body{ height:100%; }
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(900px 500px at 10% 10%, rgba(94,234,212,.18), transparent 60%),
-        radial-gradient(700px 450px at 90% 15%, rgba(99,102,241,.20), transparent 60%),
-        radial-gradient(900px 600px at 50% 100%, rgba(244,114,182,.14), transparent 65%),
-        linear-gradient(135deg, var(--bg1), var(--bg2));
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color:#111;
+    }
+
+    /* TOP BAR */
+    header{
+      background: var(--yellow);
+      border-bottom: 2px solid rgba(0,0,0,.35);
+      box-shadow: var(--shadow);
+    }
+    .topnav{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 14px 14px;
       display:flex;
       align-items:center;
-      justify-content:center;
-      padding: 24px;
+      justify-content: space-around;
+      gap: 10px;
+      font-size: 14px;
+    }
+    .topnav a{
+      color:#111;
+      text-decoration:none;
+      padding: 8px 10px;
+      border-radius: 6px;
+    }
+    .topnav a:hover{
+      background: rgba(255,255,255,.35);
     }
 
-    .wrap{
-      width: min(980px, 100%);
+    /* MAIN */
+    main{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 18px 14px 8px;
+    }
+
+    .topRow{
+      display:flex;
+      align-items:center;
+      justify-content: center;
+      position: relative;
+      margin: 10px 0 14px;
+      min-height: 60px;
+    }
+    .smileLeft{
+      position:absolute;
+      left: 14px;
+      top: 2px;
+      font-size: 44px;
+      line-height: 1;
+    }
+    .yo{
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    /* CARDS GRID */
+    .grid{
       display:grid;
-      grid-template-columns: 1.1fr .9fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 18px;
-    }
-
-    @media (max-width: 900px){
-      .wrap{ grid-template-columns:1fr; }
+      padding: 8px 0 18px;
     }
 
     .card{
-      background: rgba(15,23,42,.72);
-      border: 1px solid var(--stroke);
-      backdrop-filter: blur(10px);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      background: var(--card);
+      border: 1px solid rgba(0,0,0,.10);
+      box-shadow: 0 2px 0 rgba(0,0,0,.15);
+      padding: 14px;
+    }
+    .card h3{
+      margin: 0 0 10px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .imgBox{
+      background:#ddd;
+      border: 1px solid rgba(0,0,0,.10);
+      height: 170px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       overflow:hidden;
-      animation: pop .5s ease-out both;
+    }
+    .imgBox img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
     }
 
-    @keyframes pop{
-      from{ transform: translateY(10px); opacity:0; }
-      to{ transform: translateY(0); opacity:1; }
+    .smallText{
+      margin: 10px 0 10px;
+      font-size: 12px;
+      color:#2b2b2b;
     }
 
-    .hero{
-      padding: 22px 22px 18px;
-    }
-
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 8px 12px;
-      border: 1px solid var(--stroke);
-      border-radius: 999px;
-      color: #c7d2fe;
-      background: rgba(99,102,241,.10);
-      font-size: 13px;
-      letter-spacing:.2px;
-    }
-
-    .title{
-      margin: 14px 0 6px;
-      font-size: clamp(26px, 4vw, 38px);
-      line-height: 1.08;
-    }
-
-    .subtitle{
-      margin: 0;
-      color: rgba(229,231,235,.75);
-      max-width: 62ch;
-      font-size: 15px;
-      line-height: 1.5;
-    }
-
-    .actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
+    /* BUTTONS like in screenshot */
     .btn{
-      appearance:none;
-      border: 1px solid var(--stroke);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-      padding: 12px 14px;
-      border-radius: 14px;
-      font-weight: 650;
-      font-size: 14px;
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
-      user-select:none;
+      width: 100%;
+      border: none;
+      cursor: pointer;
+      padding: 12px 10px;
+      font-weight: 700;
+      text-transform: none;
+      color: #fff;
+      box-shadow: 0 2px 0 rgba(0,0,0,.20);
     }
+    .btn:active{ transform: translateY(1px); box-shadow: 0 1px 0 rgba(0,0,0,.18); }
 
-    .btn:hover{
-      transform: translateY(-1px);
-      background: rgba(255,255,255,.10);
-      border-color: rgba(255,255,255,.22);
+    .btn.green{ background: var(--green); }
+    .btn.purple{ background: var(--purple); }
+    .btn.gray{ background: var(--darkgray); }
+
+    /* FOOTER */
+    footer{
+      background: var(--blue);
+      color:#fff;
+      margin-top: 8px;
+      box-shadow: 0 -2px 0 rgba(0,0,0,.15);
     }
-    .btn:active{ transform: translateY(1px) scale(.99); }
-
-    .btn.primary{
-      background: linear-gradient(135deg, rgba(99,102,241,.85), rgba(16,185,129,.75));
-      border-color: rgba(255,255,255,.18);
-    }
-    .btn.primary:hover{ background: linear-gradient(135deg, rgba(99,102,241,.95), rgba(16,185,129,.88)); }
-
-    .btn.danger{
-      background: rgba(239,68,68,.12);
-      border-color: rgba(239,68,68,.25);
-      color:#fecaca;
-    }
-    .btn.danger:hover{ background: rgba(239,68,68,.18); }
-
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      padding: 0 22px 22px;
-    }
-
-    @media (max-width: 520px){
-      .grid{ grid-template-columns:1fr; }
-    }
-
-    .mini{
+    .footerInner{
+      max-width: 980px;
+      margin: 0 auto;
       padding: 14px 14px;
-      border: 1px solid var(--stroke);
-      background: rgba(255,255,255,.04);
-      border-radius: 16px;
-    }
-
-    .mini h3{
-      margin:0 0 6px;
-      font-size: 14px;
-      letter-spacing:.2px;
-    }
-    .mini p{
-      margin:0;
-      font-size: 13px;
-      color: rgba(229,231,235,.72);
-      line-height: 1.45;
-    }
-
-    /* Photo side */
-    .photo{
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-    }
-
-    .photoTop{
-      padding: 18px;
-      border-bottom: 1px solid var(--stroke);
-      display:flex;
+      display:grid;
+      grid-template-columns: 90px 1fr 90px;
       align-items:center;
-      justify-content:space-between;
       gap: 12px;
     }
 
-    .photoTop .muted{
-      color: rgba(229,231,235,.68);
-      font-size: 13px;
-    }
-
-    .pill{
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      border: 1px solid var(--stroke);
-      border-radius: 999px;
-      padding: 8px 10px;
-      background: rgba(255,255,255,.04);
-      font-size: 12.5px;
-      color: rgba(229,231,235,.78);
-      cursor:pointer;
-      transition: background .12s ease, transform .12s ease;
-    }
-    .pill:hover{ background: rgba(255,255,255,.08); transform: translateY(-1px); }
-    .pill:active{ transform: translateY(1px); }
-
-    .imgWrap{
-      padding: 18px;
-      position:relative;
-    }
-
-    img{
-      width:100%;
-      height:auto;
-      display:block;
-      border-radius: 16px;
-      border: 1px solid var(--stroke);
-      box-shadow: 0 14px 40px rgba(0,0,0,.35);
-      transition: transform .18s ease;
-    }
-
-    .imgWrap:hover img{
-      transform: scale(1.01);
-    }
-
-    .footer{
-      padding: 14px 18px;
-      border-top: 1px solid var(--stroke);
-      color: rgba(229,231,235,.55);
-      font-size: 12.5px;
+    .logoBox{
+      width: 70px;
+      height: 70px;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.25);
       display:flex;
-      justify-content:space-between;
-      gap: 10px;
-      flex-wrap:wrap;
-    }
-
-    /* Modal */
-    .modalBack{
-      position:fixed;
-      inset:0;
-      background: rgba(0,0,0,.55);
-      display:none;
       align-items:center;
       justify-content:center;
-      padding: 20px;
-      z-index: 999;
+      overflow:hidden;
     }
-    .modal{
-      width:min(560px, 100%);
-      background: rgba(15,23,42,.92);
-      border: 1px solid var(--stroke);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      padding: 18px;
-      animation: pop .2s ease-out both;
+    .logoBox img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
     }
-    .modal h2{ margin:0 0 8px; font-size: 18px; }
-    .modal p{ margin:0; color: rgba(229,231,235,.75); line-height:1.5; font-size: 14px; }
-    .modalActions{ display:flex; justify-content:flex-end; gap: 10px; margin-top: 14px; }
-    .show{ display:flex; }
 
-    /* Small icon dots */
-    .dot{
-      width:10px; height:10px; border-radius:999px;
-      background: rgba(255,255,255,.25);
-      display:inline-block;
+    .footerText{
+      text-align:center;
+      font-size: 13px;
+      line-height: 1.35;
     }
-    .dot.g{ background: rgba(16,185,129,.75); }
-    .dot.b{ background: rgba(99,102,241,.85); }
-    .dot.p{ background: rgba(244,114,182,.75); }
+    .footerText .muted{
+      opacity: .9;
+    }
+    .footerSmile{
+      text-align:center;
+      margin-top: 6px;
+      opacity:.9;
+    }
+
+    /* Mobile: make it 1 column */
+    @media (max-width: 650px){
+      .grid{ grid-template-columns: 1fr; }
+      .smileLeft{ left: 6px; }
+      .footerInner{
+        grid-template-columns: 70px 1fr 70px;
+      }
+      .logoBox{ width: 64px; height: 64px; }
+    }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <!-- Left: text + real buttons -->
-    <section class="card">
-      <div class="hero">
-        <div class="badge">
-          <span class="dot b"></span>
-          <strong>Davyd’s Site</strong>
-          <span style="opacity:.8">•</span>
-          <span style="opacity:.85">v3.1.0.2</span>
-        </div>
+  <header>
+    <nav class="topnav">
+      <a href="#" onclick="alert('Bruh clicked')">Bruh</a>
+      <a href="#" onclick="alert('Other davyd\\'s site clicked')">Other davyd's site</a>
+      <a href="#" onclick="alert('Lick clicked')">Lick</a>
+    </nav>
+  </header>
 
-        <h1 class="title">Привіт 👋 Я Davyd</h1>
-        <p class="subtitle">
-          Це оновлена, не-крінжова версія сторінки 😄
-          Тут є справжні кнопки, акуратний дизайн і адаптація під телефон.
-        </p>
+  <main>
+    <div class="topRow">
+      <div class="smileLeft">🙂</div>
+      <div class="yo">yo</div>
+    </div>
 
-        <div class="actions">
-          <button class="btn primary" id="btnAbout">✨ Про мене</button>
-          <button class="btn" id="btnProjects">🧩 Проєкти</button>
-          <button class="btn" id="btnCopy">📋 Скопіювати посилання на фото</button>
-          <button class="btn danger" id="btnJoke">😈 Кнопка “крінж”</button>
+    <section class="grid">
+      <!-- CARD 1 -->
+      <article class="card">
+        <h3>Innovation Fan</h3>
+        <div class="imgBox">
+          <!-- заміни src на свою картинку -->
+          <img src="https://picsum.photos/500/400?random=1" alt="Innovation Fan">
         </div>
-      </div>
+        <p class="smallText">BUY ONLY HERE! DONT BUY AT 6KILLS</p>
+        <button class="btn green" onclick="alert('3102 Funds!')">3102 Funds</button>
+      </article>
 
-      <div class="grid">
-        <div class="mini">
-          <h3>🔧 Що покращено</h3>
-          <p>Картка, кнопки з hover/натисканням, гарні відступи, мобільна версія.</p>
+      <!-- CARD 2 -->
+      <article class="card">
+        <h3>mADATTAK</h3>
+        <div class="imgBox">
+          <img src="https://picsum.photos/500/400?random=2" alt="mADATTAK">
         </div>
-        <div class="mini">
-          <h3>🚀 Далі можна</h3>
-          <p>Додати меню, сторінку “Контакти”, анімації, або зробити сайт як у бренду.</p>
+        <p class="smallText">&nbsp;</p>
+        <button class="btn gray" onclick="alert('WHY U DO THIS?')">WHY U DO<br>THIS?</button>
+      </article>
+
+      <!-- CARD 3 -->
+      <article class="card">
+        <h3>gubby</h3>
+        <div class="imgBox">
+          <img src="https://picsum.photos/500/400?random=3" alt="gubby">
         </div>
-        <div class="mini">
-          <h3>🎨 Стиль</h3>
-          <p>Скляний ефект, тіні, градієнти — виглядає сучасно і “живе”.</p>
+        <p class="smallText">this is gubby.</p>
+        <button class="btn purple" onclick="alert('3000 gubby')">3000 gubby</button>
+      </article>
+
+      <!-- CARD 4 -->
+      <article class="card">
+        <h3>nothing</h3>
+        <div class="imgBox">
+          <img src="https://picsum.photos/500/400?random=4" alt="nothing">
         </div>
-        <div class="mini">
-          <h3>📱 Телефон</h3>
-          <p>Все автоматично стає в 1 колонку, кнопки зручні для торкання.</p>
-        </div>
-      </div>
+        <p class="smallText">nothing...</p>
+        <button class="btn gray" onclick="alert('only mAdattak can buy thiz')">only mAdattak<br>can buy thiz</button>
+      </article>
     </section>
+  </main>
 
-    <!-- Right: photo card -->
-    <aside class="card photo">
-      <div class="photoTop">
-        <div>
-          <div class="muted">Твоє фото (залишив як є)</div>
-          <div style="font-weight:700; margin-top:2px;">Gallery Card</div>
-        </div>
-        <button class="pill" id="btnFullscreen">
-          <span class="dot g"></span>
-          <span>Відкрити</span>
-        </button>
+  <footer>
+    <div class="footerInner">
+      <!-- Left logo -->
+      <div class="logoBox" title="Left logo">
+        <!-- встав сюди свою картинку логотипа -->
+        <img src="https://picsum.photos/200/200?random=10" alt="Left logo">
       </div>
 
-      <div class="imgWrap">
-        <img
-          id="mainImg"
-          src="https://learn.logikaschool.com/uploads/student/4796102/68c5196fea911.png"
-          alt="Davyd image"
-          loading="lazy"
-        />
+      <!-- Center text -->
+      <div class="footerText">
+        <div class="muted">©Bloxy Bricks 2025</div>
+        <div>#OUR INNOVATION BETTER THAN 6KILLS</div>
+        <div class="footerSmile">🙂</div>
       </div>
 
-      <div class="footer">
-        <span>© <span id="year"></span> Davyd</span>
-        <span style="opacity:.85">Made with HTML + CSS</span>
-      </div>
-    </aside>
-  </div>
-
-  <!-- Modal -->
-  <div class="modalBack" id="modalBack" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <h2 id="modalTitle">Заголовок</h2>
-      <p id="modalText">Текст</p>
-      <div class="modalActions">
-        <button class="btn" id="btnClose">Закрити</button>
+      <!-- Right logo -->
+      <div class="logoBox" title="Right logo">
+        <!-- встав сюди свою аватарку/лого -->
+        <img src="https://picsum.photos/200/200?random=11" alt="Right logo">
       </div>
     </div>
-  </div>
-
-  <script>
-    const IMG_URL = "https://learn.logikaschool.com/uploads/student/4796102/68c5196fea911.png";
-
-    const modalBack = document.getElementById("modalBack");
-    const modalTitle = document.getElementById("modalTitle");
-    const modalText  = document.getElementById("modalText");
-
-    function openModal(title, text){
-      modalTitle.textContent = title;
-      modalText.textContent = text;
-      modalBack.classList.add("show");
-      modalBack.setAttribute("aria-hidden", "false");
-    }
-    function closeModal(){
-      modalBack.classList.remove("show");
-      modalBack.setAttribute("aria-hidden", "true");
-    }
-
-    document.getElementById("btnClose").addEventListener("click", closeModal);
-    modalBack.addEventListener("click", (e) => {
-      if(e.target === modalBack) closeModal();
-    });
-    window.addEventListener("keydown", (e) => {
-      if(e.key === "Escape") closeModal();
-    });
-
-    document.getElementById("btnAbout").addEventListener("click", () => {
-      openModal("✨ Про мене", "Тут можна написати коротко: хто ти, чим займаєшся, що робиш у Roblox/проєктах і т.д.");
-    });
-
-    document.getElementById("btnProjects").addEventListener("click", () => {
-      openModal("🧩 Проєкти", "Додай список: IIWB / Engineering Research / сайти / ігри. Якщо хочеш — зроблю тобі красиві карточки з проєктами.");
-    });
-
-    document.getElementById("btnCopy").addEventListener("click", async () => {
-      try{
-        await navigator.clipboard.writeText(IMG_URL);
-        openModal("📋 Скопійовано!", "Посилання на фото скопійоване в буфер обміну.");
-      }catch{
-        openModal("📋 Не вийшло скопіювати", "Твій браузер не дав доступ до буфера. Скопіюй вручну: " + IMG_URL);
-      }
-    });
-
-    document.getElementById("btnJoke").addEventListener("click", () => {
-      openModal("😈 Крінж режим", "Офіційно: крінж дозволений тільки якщо це мем 😄");
-    });
-
-    document.getElementById("btnFullscreen").addEventListener("click", () => {
-      window.open(IMG_URL, "_blank");
-    });
-
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+  </footer>
 </body>
 </html>
